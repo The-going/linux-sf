@@ -3569,6 +3569,13 @@ static int spi_nor_probe(struct spi_mem *spimem)
 	if (!nor)
 		return -ENOMEM;
 
+	ret = devm_regulator_get_enable(&spi->dev, "vdd");
+	if (ret)
+		return dev_err_probe(&spi->dev, ret,
+				     "unable to get vdd regulator\n");
+
+	msleep(5);
+
 	nor->spimem = spimem;
 	nor->dev = dev;
 	spi_nor_set_flash_node(nor, dev->of_node);
