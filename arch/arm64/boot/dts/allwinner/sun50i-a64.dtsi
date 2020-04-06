@@ -257,21 +257,21 @@
 			trips {
 				cpu_alert0: cpu-alert0 {
 					/* milliCelsius */
-					temperature = <75000>;
+					temperature = <70000>;
 					hysteresis = <2000>;
 					type = "passive";
 				};
 
 				cpu_alert1: cpu-alert1 {
 					/* milliCelsius */
-					temperature = <90000>;
+					temperature = <80000>;
 					hysteresis = <2000>;
 					type = "hot";
 				};
 
 				cpu_crit: cpu-crit {
 					/* milliCelsius */
-					temperature = <110000>;
+					temperature = <90000>;
 					hysteresis = <2000>;
 					type = "critical";
 				};
