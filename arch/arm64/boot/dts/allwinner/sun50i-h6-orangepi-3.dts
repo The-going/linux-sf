@@ -128,6 +128,10 @@
 	status = "okay";
 };
 
+&i2s1 {
+	status = "okay";
+};
+
 &hdmi {
 	status = "okay";
 };
@@ -165,10 +169,6 @@
 		reset-assert-us = <15000>;
 		reset-deassert-us = <40000>;
 	};
-};
-
-&i2s1 {
-	status = "okay";
 };
 
 &mmc0 {
