@@ -22,7 +22,15 @@ quiet_cmd_dtb_install = INSTALL $@
 $(dst)/%: $(obj)/%
 	$(call cmd,dtb_install)
 
+$(dst)/%.scr: $(obj)/%.scr
+	$(call cmd,dtb_install)
+
+$(dst)/README.%-overlays: $(obj)/README.%-overlays
+	$(call cmd,dtb_install)
+
 dtbs := $(patsubst $(obj)/%,%,$(call read-file, $(obj)/dtbs-list))
+script-files	:= $(addprefix $(dst)/, $(scr-y))
+readme-files	:= $(addprefix $(dst)/, $(dtbotxt-y))
 
 ifdef CONFIG_ARCH_WANT_FLAT_DTB_INSTALL
 
@@ -37,7 +45,7 @@ dtbs := $(notdir $(dtbs))
 
 endif # CONFIG_ARCH_WANT_FLAT_DTB_INSTALL
 
-__dtbs_install: $(addprefix $(dst)/, $(dtbs))
+__dtbs_install: $(addprefix $(dst)/, $(dtbs)) $(script-files) $(readme-files)
 	@:
 
 .PHONY: $(PHONY)
