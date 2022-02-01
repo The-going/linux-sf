@@ -42,6 +42,7 @@
 *.rpm
 *.rsi
 *.s
+*.scr
 *.so
 *.so.dbg
 *.su
