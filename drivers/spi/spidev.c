@@ -703,6 +703,7 @@ static const struct class spidev_class = {
  * spidev_dt_ids array below. Both arrays are kept in the same ordering.
  */
 static const struct spi_device_id spidev_spi_ids[] = {
+	{ .name = /* armbian */ "spi-dev" },
 	{ .name = /* cisco */ "spi-petra" },
 	{ .name = /* dh */ "dhcom-board" },
 	{ .name = /* elgin */ "jg10309-01" },
@@ -730,10 +731,12 @@ static int spidev_of_check(struct device *dev)
 		return 0;
 
 	dev_err(dev, "spidev listed directly in DT is not supported\n");
+	dev_info(dev, "Use a compatible alias string like spi-dev in DT\n");
 	return -EINVAL;
 }
 
 static const struct of_device_id spidev_dt_ids[] = {
+	{ .compatible = "armbian,spi-dev", .data = &spidev_of_check },
 	{ .compatible = "cisco,spi-petra", .data = &spidev_of_check },
 	{ .compatible = "dh,dhcom-board", .data = &spidev_of_check },
 	{ .compatible = "elgin,jg10309-01", .data = &spidev_of_check },
