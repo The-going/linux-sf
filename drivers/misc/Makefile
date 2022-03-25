@@ -72,3 +72,4 @@ obj-$(CONFIG_NSM)		+= nsm.o
 obj-$(CONFIG_MARVELL_CN10K_DPI)	+= mrvl_cn10k_dpi.o
 obj-y				+= keba/
 obj-$(CONFIG_MODEM_POWER)	+= modem-power.o
+obj-$(CONFIG_SUNXI_ADDR_MGT)    += sunxi-addr/
