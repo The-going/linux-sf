@@ -75,3 +75,4 @@ lan966x-pci-objs		+= lan966x_pci.dtbo.o
 obj-$(CONFIG_MCHP_LAN966X_PCI)	+= lan966x-pci.o
 obj-y				+= keba/
 obj-$(CONFIG_MODEM_POWER)	+= modem-power.o
+obj-$(CONFIG_SUNXI_ADDR_MGT)    += sunxi-addr/
