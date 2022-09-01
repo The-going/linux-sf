@@ -104,6 +104,19 @@
 	};
 };
 
+&ac200_codec {
+	avcc-supply = <&reg_aldo2>;
+	status = "okay";
+};
+
+&ac200_pwm_clk {
+	status = "okay";
+};
+
+&analog {
+	status = "okay";
+};
+
 &cpu0 {
 	cpu-supply = <&reg_dcdca>;
 };
@@ -172,6 +185,14 @@
 	status = "okay";
 };
 
+&i2c3 {
+	status = "okay";
+};
+
+&i2s3 {
+	status = "okay";
+};
+
 &mmc0 {
 	vmmc-supply = <&reg_cldo1>;
 	cd-gpios = <&pio 5 6 GPIO_ACTIVE_LOW>; /* PF6 */
@@ -217,6 +238,10 @@
 	vcc-pc-supply = <&reg_bldo2>;
 	vcc-pd-supply = <&reg_cldo1>;
 	vcc-pg-supply = <&reg_vcc_wifi_io>;
+};
+
+&pwm {
+	status = "okay";
 };
 
 &r_ir {
