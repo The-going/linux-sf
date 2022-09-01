@@ -104,6 +104,19 @@
 	};
 };
 
+&ac200_codec {
+	avcc-supply = <&reg_aldo2>;
+	status = "okay";
+};
+
+&ac200_pwm_clk {
+	status = "okay";
+};
+
+&analog {
+	status = "okay";
+};
+
 &cpu0 {
 	cpu-supply = <&reg_dcdca>;
 };
@@ -130,6 +143,14 @@
 };
 
 &i2s1 {
+	status = "okay";
+};
+
+&i2c3 {
+	status = "okay";
+};
+
+&i2s3 {
 	status = "okay";
 };
 
@@ -335,6 +356,10 @@
 			};
 		};
 	};
+};
+
+&pwm {
+	status = "okay";
 };
 
 &r_ir {
