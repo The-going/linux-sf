@@ -80,6 +80,7 @@ dtb-$(CONFIG_MACH_SUN8I) += \
 	sun8i-h3-usbhost2.dtbo \
 	sun8i-h3-usbhost3.dtbo \
 	sun8i-h3-w1-gpio.dtbo \
+        sun8i-h3-tve.dtbo \
 	sun8i-r40-i2c2.dtbo \
 	sun8i-r40-i2c3.dtbo \
 	sun8i-r40-spi-spidev0.dtbo \
