@@ -26,6 +26,7 @@ adding fixed software (GPIO) chip selects is possible with a separate overlay
 - spi-add-cs1
 - spi-jedec-nor
 - spi-spidev
+- tve
 - uart1
 - uart2
 - uart3
@@ -169,6 +170,10 @@ param_spidev_max_freq (int)
 	Optional
 	Default: 1000000
 	Range: 3000 - 100000000
+
+### tve
+
+Activates Composite TV Encoder
 
 ### uart1
 
