@@ -7,6 +7,7 @@
 
 #include "sun50i-h616-orangepi-zero.dtsi"
 #include "sun50i-h616-cpu-opp.dtsi"
+#include "sun50i-h618-cpu-dvfs.dtsi"
 
 / {
 	model = "OrangePi Zero3";
@@ -34,62 +35,6 @@
 	 */
 	broken-cd;
 	vmmc-supply = <&reg_dldo1>;
-};
-
-&r_i2c {
-	status = "okay";
-
-	axp313: pmic@36 {
-		compatible = "x-powers,axp313a";
-		reg = <0x36>;
-		#interrupt-cells = <1>;
-		interrupt-controller;
-		interrupt-parent = <&pio>;
-		interrupts = <2 9 IRQ_TYPE_LEVEL_LOW>;	/* PC9 */
-
-		vin1-supply = <&reg_vcc5v>;
-		vin2-supply = <&reg_vcc5v>;
-		vin3-supply = <&reg_vcc5v>;
-
-		regulators {
-			/* Supplies VCC-PLL, so needs to be always on. */
-			reg_aldo1: aldo1 {
-				regulator-always-on;
-				regulator-min-microvolt = <1800000>;
-				regulator-max-microvolt = <1800000>;
-				regulator-name = "vcc1v8";
-			};
-
-			/* Supplies VCC-IO, so needs to be always on. */
-			reg_dldo1: dldo1 {
-				regulator-always-on;
-				regulator-min-microvolt = <3300000>;
-				regulator-max-microvolt = <3300000>;
-				regulator-name = "vcc3v3";
-			};
-
-			reg_dcdc1: dcdc1 {
-				regulator-always-on;
-				regulator-min-microvolt = <810000>;
-				regulator-max-microvolt = <990000>;
-				regulator-name = "vdd-gpu-sys";
-			};
-
-			reg_dcdc2: dcdc2 {
-				regulator-always-on;
-				regulator-min-microvolt = <810000>;
-				regulator-max-microvolt = <1100000>;
-				regulator-name = "vdd-cpu";
-			};
-
-			reg_dcdc3: dcdc3 {
-				regulator-always-on;
-				regulator-min-microvolt = <1100000>;
-				regulator-max-microvolt = <1100000>;
-				regulator-name = "vdd-dram";
-			};
-		};
-	};
 };
 
 &pio {
