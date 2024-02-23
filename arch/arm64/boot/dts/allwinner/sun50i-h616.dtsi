@@ -331,6 +331,18 @@
 				function = "i2c4";
 			};
 
+			/omit-if-no-ref/
+			i2c3_pg_pins: i2c3-pg-pins {
+				pins = "PG17", "PG18";
+				function = "i2c3";
+			};
+
+			/omit-if-no-ref/
+			i2c4_pg_pins: i2c4-pg-pins {
+				pins = "PG15", "PG16";
+				function = "i2c4";
+			};
+
 			ir_rx_pin: ir-rx-pin {
 				pins = "PH10";
 				function = "ir_rx";
