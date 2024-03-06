@@ -404,6 +404,12 @@
 				function = "spi1";
 			};
 
+			/omit-if-no-ref/
+			spi1_cs1_pin: spi1-cs1-pin {
+				pins = "PH9";
+				function = "spi1";
+			};
+
 			spdif_tx_pin: spdif-tx-pin {
 				pins = "PH4";
 				function = "spdif";
