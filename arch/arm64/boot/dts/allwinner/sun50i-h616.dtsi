@@ -407,6 +407,12 @@
 				function = "spi1";
 			};
 
+			/omit-if-no-ref/
+			spi1_cs1_pin: spi1-cs1-pin {
+				pins = "PH9";
+				function = "spi1";
+			};
+
 			uart0_ph_pins: uart0-ph-pins {
 				pins = "PH0", "PH1";
 				function = "uart0";
