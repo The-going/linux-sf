@@ -312,12 +312,6 @@
 	status = "disabled";
 };
 
-&uart5 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&uart5_ph_pins>;
-	status = "disabled";
-};
-
 &i2c3 {
 	status = "okay";
 	pinctrl-names = "default";
@@ -445,12 +439,6 @@
 	uart4_pi_pins: uart4-pi-pins {
 		pins = "PI13", "PI14";
 		function = "uart4";
-	};
-
-	/omit-if-no-ref/
-	uart5_ph_pins: uart5-ph-pins {
-		pins = "PH2", "PH3";
-		function = "uart5";
 	};
 
 	/omit-if-no-ref/
