@@ -49,11 +49,11 @@ dtb-$(CONFIG_ARCH_SUNXI) += \
 	sun50i-h6-uart2.dtbo \
 	sun50i-h6-uart3.dtbo \
 	sun50i-h6-w1-gpio.dtbo \
-	sun50i-h616-i2c2.dtbo \
-	sun50i-h616-i2c3.dtbo \
-	sun50i-h616-i2c4.dtbo \
-	sun50i-h616-uart2.dtbo \
-	sun50i-h616-uart5.dtbo \
+	sun50i-h616-i2c2-ph.dtbo \
+	sun50i-h616-i2c3-ph.dtbo \
+	sun50i-h616-i2c4-ph.dtbo \
+	sun50i-h616-uart2-ph.dtbo \
+	sun50i-h616-uart5-ph.dtbo \
 	sun50i-h616-spi-spidev.dtbo \
 	sun50i-h616-spidev0_0.dtbo \
 	sun50i-h616-spidev1_0.dtbo \
@@ -63,7 +63,11 @@ dtb-$(CONFIG_ARCH_SUNXI) += \
 	sun50i-h616-tft35_spi.dtbo \
 	sun50i-h616-mcp2515.dtbo \
 	sun50i-h616-ws2812.dtbo \
-	sun50i-h616-light.dtbo
+	sun50i-h616-light.dtbo \
+	sun50i-h616-i2c0-pi.dtbo \
+	sun50i-h616-i2c1-pi.dtbo \
+	sun50i-h616-i2c2-pi.dtbo \
+	sun50i-h616-gpu.dtbo
 
 scr-$(CONFIG_ARCH_SUNXI) += \
 	sun50i-a64-fixup.scr \
