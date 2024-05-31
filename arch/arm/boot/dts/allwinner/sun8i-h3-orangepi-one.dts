@@ -209,3 +209,10 @@
 	usb0_vbus-supply = <&reg_usb0_vbus>;
 	status = "okay";
 };
+
+&pio {
+        vcc-pa-supply = <&reg_vcc3v3>;
+        vcc-pc-supply = <&reg_vcc3v3>;
+        vcc-pd-supply = <&reg_vcc3v3>;
+        vcc-pg-supply = <&reg_vcc3v3>;
+};
