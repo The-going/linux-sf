@@ -354,6 +354,10 @@
 	status = "okay";
 };
 
+&ir {
+	status = "okay";
+};
+
 &usbotg {
 	/*
 	 * PHY0 pins are connected to a USB-C socket, but a role switch
