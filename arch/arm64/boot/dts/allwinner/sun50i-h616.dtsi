@@ -410,6 +410,12 @@
 			};
 
 			/omit-if-no-ref/
+			i2c1_pi_pins: i2c1-pi-pins {
+				pins = "PI7", "PI8";
+				function = "i2c1";
+			};
+
+			/omit-if-no-ref/
 			i2c2_ph_pins: i2c2-ph-pins {
 				pins = "PH2", "PH3";
 				function = "i2c2";
@@ -571,6 +577,12 @@
 				function = "spi1";
 			};
 
+			/omit-if-no-ref/
+			spi1_cs1_pin: spi1-cs1-pin {
+				pins = "PH9";
+				function = "spi1";
+			};
+
 			spdif_tx_pin: spdif-tx-pin {
 				pins = "PH4";
 				function = "spdif";
@@ -591,6 +603,12 @@
 			uart1_rts_cts_pins: uart1-rts-cts-pins {
 				pins = "PG8", "PG9";
 				function = "uart1";
+			};
+
+			/omit-if-no-ref/
+			uart2_pi_pins: uart2-pi-pins {
+				pins = "PI5", "PI6";
+				function = "uart2";
 			};
 
 			/omit-if-no-ref/
@@ -615,6 +633,24 @@
 			uart2_ph_rts_cts_pins: uart2-ph-rts-cts-pins {
 				pins = "PH7", "PH8";
 				function = "uart2";
+			};
+
+			/omit-if-no-ref/
+			uart3_pi_pins: uart3-pi-pins {
+				pins = "PI9", "PI10";
+				function = "uart3";
+			};
+
+			/omit-if-no-ref/
+			uart4_pi_pins: uart4-pi-pins {
+				pins = "PI13", "PI14";
+				function = "uart4";
+			};
+
+			/omit-if-no-ref/
+			uart4_pi_rts_cts_pins: uart4-pi-rts-cts-pins {
+				pins = "PI15", "PI16";
+				function = "uart4";
 			};
 
 			/omit-if-no-ref/
