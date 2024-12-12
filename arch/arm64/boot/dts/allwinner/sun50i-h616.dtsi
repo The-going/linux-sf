@@ -410,6 +410,12 @@
 			};
 
 			/omit-if-no-ref/
+			i2c1_pi_pins: i2c1-pi-pins {
+				pins = "PI7", "PI8";
+				function = "i2c1";
+			};
+
+			/omit-if-no-ref/
 			i2c2_ph_pins: i2c2-ph-pins {
 				pins = "PH2", "PH3";
 				function = "i2c2";
@@ -568,6 +574,12 @@
 			/omit-if-no-ref/
 			spi1_cs0_pin: spi1-cs0-pin {
 				pins = "PH5";
+				function = "spi1";
+			};
+
+			/omit-if-no-ref/
+			spi1_cs1_pin: spi1-cs1-pin {
+				pins = "PH9";
 				function = "spi1";
 			};
 
