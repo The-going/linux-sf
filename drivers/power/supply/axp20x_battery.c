@@ -1262,16 +1262,15 @@ static int axp20x_power_probe(struct platform_device *pdev)
 
 	ret = axp20x_batt->data->cfg_iio_chan(pdev, axp20x_batt);
 	if (ret)
-		return ret;
+		return dev_err_probe(&pdev->dev, ret,
+				     "failed to configure iio channels\n");
 
 	axp20x_batt->batt = devm_power_supply_register(&pdev->dev,
 						       axp20x_batt->data->bat_ps_desc,
 						       &psy_cfg);
-	if (IS_ERR(axp20x_batt->batt)) {
-		dev_err(&pdev->dev, "failed to register power supply: %ld\n",
-			PTR_ERR(axp20x_batt->batt));
-		return PTR_ERR(axp20x_batt->batt);
-	}
+	if (IS_ERR(axp20x_batt->batt))
+		return dev_err_probe(&pdev->dev, PTR_ERR(axp20x_batt->batt),
+				     "failed to register power supply\n");
 
 	axp20x_batt->health = POWER_SUPPLY_HEALTH_GOOD;
 
@@ -1286,20 +1285,17 @@ static int axp20x_power_probe(struct platform_device *pdev)
 	/* Request irqs after registering, as irqs may trigger immediately */
 	for (irq_data = axp20x_batt->data->irqs; irq_data->name; irq_data++) {
 		irq = platform_get_irq_byname(pdev, irq_data->name);
-		if (irq < 0) {
-			dev_err(&pdev->dev, "No IRQ for %s: %d\n",
-				irq_data->name, irq);
-			return irq;
-		}
+		if (irq < 0)
+			return dev_err_probe(&pdev->dev, irq,
+					     "No IRQ for %s\n", irq_data->name);
+
 		irq = regmap_irq_get_virq(axp20x->regmap_irqc, irq);
 		ret = devm_request_any_context_irq(&pdev->dev, irq,
 						   irq_data->handler, 0,
 						   DRVNAME, axp20x_batt);
-		if (ret < 0) {
-			dev_err(&pdev->dev, "Error requesting %s IRQ: %d\n",
-				irq_data->name, ret);
-			return ret;
-		}
+		if (ret < 0)
+			return dev_err_probe(&pdev->dev, ret,
+					     "Error requesting %s IRQ\n", irq_data->name);
 	}
 
 	/*
