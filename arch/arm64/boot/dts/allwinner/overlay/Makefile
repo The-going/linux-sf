@@ -49,6 +49,19 @@ dtb-$(CONFIG_ARCH_SUNXI) += \
 	sun50i-h6-uart2.dtbo \
 	sun50i-h6-uart3.dtbo \
 	sun50i-h6-w1-gpio.dtbo \
+	sun50i-h616-bananapi-m4-pg-6-7-uart1.dtbo \
+	sun50i-h616-bananapi-m4-pg-8-9-rts-cts-uart1.dtbo \
+	sun50i-h616-bananapi-m4-pg-15-16-i2c4.dtbo \
+	sun50i-h616-bananapi-m4-pg-17-18-i2c3.dtbo \
+	sun50i-h616-bananapi-m4-ph-2-3-uart5.dtbo \
+	sun50i-h616-bananapi-m4-pi-13-14-uart4.dtbo \
+	sun50i-h616-bananapi-m4-pi-15-16-rts-cts-uart4.dtbo \
+	sun50i-h616-bananapi-m4-pi-5-6-i2c0.dtbo \
+	sun50i-h616-bananapi-m4-pi-7-8-i2c1.dtbo \
+	sun50i-h616-bananapi-m4-sdio-wifi-bt.dtbo \
+	sun50i-h616-bananapi-m4-spi1-cs0-cs1-spidev.dtbo \
+	sun50i-h616-bananapi-m4-spi1-cs0-spidev.dtbo \
+	sun50i-h616-bananapi-m4-spi1-cs1-spidev.dtbo \
 	sun50i-h616-gpu.dtbo \
 	sun50i-h616-i2c0-pi.dtbo \
 	sun50i-h616-i2c1-pi.dtbo \
