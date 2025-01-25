@@ -21,8 +21,8 @@
 };
 
 &i2c_gpio {
-	gpios = <&pio 8 6 GPIO_ACTIVE_HIGH>, /* SDA PI6 */
-			<&pio 8 4 GPIO_ACTIVE_HIGH>; /* SCL PI4 */
+	gpios = <&pio 8 6 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>, /* SDA PI6 */
+			<&pio 8 4 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>; /* SCL PI4 */
 };
 
 &can0_pin_irq {
