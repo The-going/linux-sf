@@ -70,22 +70,20 @@ static void tsc2007_read_values(struct tsc2007 *tsc, struct ts_event *tc)
 
 u32 tsc2007_calculate_resistance(struct tsc2007 *tsc, struct ts_event *tc)
 {
-	u32 rt = 0;
-
-	/* range filtering */
-	if (tc->x == MAX_12BIT)
+	if (tc->x == MAX_12BIT){
 		tc->x = 0;
-
-	if (likely(tc->x && tc->z1)) {
-		/* compute touch resistance using equation #1 */
-		rt = tc->z2 - tc->z1;
-		rt *= tc->x;
-		rt *= tsc->x_plate_ohms;
-		rt /= tc->z1;
-		rt = (rt + 2047) >> 12;
 	}
 
-	return rt;
+	if (tc->y == MAX_12BIT){
+		tc->y = 0;
+	}
+
+
+	if (likely(tc->x && tc->y && tc->z1)) {
+		return (tsc->x_plate_ohms * tc->x / 4096) * ((4096 / tc->z1) - 1) - tsc->y_plate_ohms * (1 - tc->y / 4096);
+	} else{
+		return 0;
+	}
 }
 
 bool tsc2007_is_pen_down(struct tsc2007 *ts)
@@ -180,6 +178,7 @@ static irqreturn_t tsc2007_soft_poll(int irq, void *handle)
 	struct input_dev *input = ts->input;
 	struct ts_event tc;
 	u32 rt;
+	bool skipSync = false;
 
 	if(!ts->stopped) {
 
@@ -189,45 +188,31 @@ static irqreturn_t tsc2007_soft_poll(int irq, void *handle)
 
 		rt = tsc2007_calculate_resistance(ts, &tc);
 
-		if (rt == 0 || rt == 256) {
+		if (likely(rt)) {
 
-			/*
-				* Sample found inconsistent by debouncing or pressure is
-				* beyond the maximum. Don't report it to user space,
-				* repeat at least once more the measurement.
-				*/
-			dev_dbg(&ts->client->dev, "ignored pressure %d\n", rt);
+			/* range >= 0 && <= 4096 */
+			if (rt > 0 && rt <= ts->max_rt) {
+					rt = ts->max_rt - rt;
+					input_report_key(input, BTN_TOUCH, 1);
+					input_report_abs(input, ABS_X, tc.y);
+					input_report_abs(input, ABS_Y, 4096 - tc.x);
+					input_report_abs(input, ABS_PRESSURE, rt);
+					input_sync(input);
 
-		} else {
-
-			if (rt < ts->rt_thr) {
-
-				dev_dbg(&ts->client->dev,
-					"DOWN point(%4d,%4d), resistance (%4u)\n",
-					tc.x, tc.y, rt);
-
-				rt = ts->max_rt - rt;
-
-				input_report_key(input, BTN_TOUCH, 1);
-				input_report_abs(input, ABS_X, tc.y);
-				input_report_abs(input, ABS_Y, 4096 - tc.x);
-				input_report_abs(input, ABS_PRESSURE, rt);
-
-				input_sync(input);
-				ts->touched = 1;
-
-			} else if (ts->touched == 1) {
-
-				dev_dbg(&ts->client->dev, "UP\n");
-
-				input_report_key(input, BTN_TOUCH, 0);
-				input_report_abs(input, ABS_PRESSURE, 0);
-				input_sync(input);
-				ts->touched = 0;
+			} else {
+				//Discard Input Ghost or inconsistent
+				skipSync= true;
 			}
+		}else{
+           // No touch event or missing data for rt calculation
+           skipSync= true;
 		}
+	}
 
-
+	if(skipSync){
+		input_report_key(input, BTN_TOUCH, 0);
+		input_report_abs(input, ABS_PRESSURE, 0);
+		input_sync(input);
 	}
 
 	return IRQ_HANDLED;
@@ -329,6 +314,13 @@ static int tsc2007_probe_properties(struct device *dev, struct tsc2007 *ts)
 		return -EINVAL;
 	}
 
+	if (!device_property_read_u32(dev, "ti,y-plate-ohms", &val32)) {
+		ts->y_plate_ohms = val32;
+	} else {
+		dev_err(dev, "Missing ti,y-plate-ohms device property\n");
+		return -EINVAL;
+	}
+
 	ts->gpiod = devm_gpiod_get_optional(dev, NULL, GPIOD_IN);
 	if (IS_ERR(ts->gpiod))
 		return PTR_ERR(ts->gpiod);
@@ -347,6 +339,7 @@ static int tsc2007_probe_pdev(struct device *dev, struct tsc2007 *ts,
 {
 	ts->model             = pdata->model;
 	ts->x_plate_ohms      = pdata->x_plate_ohms;
+	ts->y_plate_ohms      = pdata->y_plate_ohms;
 	ts->max_rt            = pdata->max_rt ? : MAX_12BIT;
 	ts->poll_period       = msecs_to_jiffies(pdata->poll_period ? : 1);
 	ts->get_pendown_state = pdata->get_pendown_state;
@@ -357,6 +350,11 @@ static int tsc2007_probe_pdev(struct device *dev, struct tsc2007 *ts,
 
 	if (pdata->x_plate_ohms == 0) {
 		dev_err(dev, "x_plate_ohms is not set up in platform data\n");
+		return -EINVAL;
+	}
+
+	if (pdata->y_plate_ohms == 0) {
+		dev_err(dev, "y_plate_ohms is not set up in platform data\n");
 		return -EINVAL;
 	}
 
@@ -458,11 +456,9 @@ static int tsc2007_probe(struct i2c_client *client)
 			return err;
 		}
 	} else {
-		INIT_WORK(&ts->work_i2c_poll,
-			  tsc2007_ts_work_i2c_poll);
+		INIT_WORK(&ts->work_i2c_poll, tsc2007_ts_work_i2c_poll);
 		timer_setup(&ts->timer, tsc2007_ts_irq_poll_timer, 0);
-		ts->timer.expires = jiffies +
-					msecs_to_jiffies(POLL_INTERVAL_MS);
+		ts->timer.expires = jiffies + msecs_to_jiffies(POLL_INTERVAL_MS);
 		add_timer(&ts->timer);
 	}
 
