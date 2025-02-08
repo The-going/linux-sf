@@ -49,6 +49,16 @@ dtb-$(CONFIG_ARCH_SUNXI) += \
 	sun50i-h6-uart2.dtbo \
 	sun50i-h6-uart3.dtbo \
 	sun50i-h6-w1-gpio.dtbo \
+	sun50i-h616-i2c2-ph.dtbo \
+	sun50i-h616-i2c3-pg.dtbo \
+	sun50i-h616-i2c3-ph.dtbo \
+	sun50i-h616-i2c4-pg.dtbo \
+	sun50i-h616-i2c4-ph.dtbo \
+	sun50i-h616-uart2-pg.dtbo \
+	sun50i-h616-uart2-pg-rts-cts.dtbo \
+	sun50i-h616-uart2-ph.dtbo \
+	sun50i-h616-uart2-ph-rts-cts.dtbo \
+	sun50i-h616-uart5.dtbo \
 	sun50i-h616-spi-spidev.dtbo \
 	sun50i-h616-spidev0_0.dtbo \
 	sun50i-h616-spidev1_0.dtbo \
