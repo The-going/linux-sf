@@ -389,6 +389,12 @@
 				function = "i2c2";
 			};
 
+			i2c3_pa_pins: i2c3-pa-pins {
+				pins = "PA10", "PA11";
+				function = "i2c3";
+				bias-pull-up;
+			};
+
 			/omit-if-no-ref/
 			i2c3_pg_pins: i2c3-pg-pins {
 				pins = "PG17", "PG18";
@@ -441,6 +447,48 @@
 				       "PC13", "PC14", "PC15", "PC16";
 				function = "mmc2";
 				drive-strength = <30>;
+				bias-pull-up;
+			};
+
+			/omit-if-no-ref/
+			pwm1_pg_pin: pwm1-pg-pin {
+				pins = "PG19";
+				function = "pwm1";
+			};
+
+			/omit-if-no-ref/
+			pwm1_ph_pin: pwm1-ph-pin {
+				pins = "PH3";
+				function = "pwm1";
+			};
+
+			/omit-if-no-ref/
+			pwm1_pi_pin: pwm1-pi-pin {
+				pins = "PI11";
+				function = "pwm1";
+			};
+
+			/omit-if-no-ref/
+			pwm2_ph_pin: pwm2-ph-pin {
+				pins = "PH2";
+				function = "pwm2";
+			};
+
+			/omit-if-no-ref/
+			pwm3_ph_pin: pwm3-ph-pin {
+				pins = "PH0";
+				function = "pwm3";
+			};
+
+			/omit-if-no-ref/
+			pwm4_ph_pin: pwm4-ph-pin {
+				pins = "PH1";
+				function = "pwm4";
+			};
+
+			pwm5_pin: pwm5-pin {
+				pins = "PA12";
+				function = "pwm5";
 				bias-pull-up;
 			};
 
