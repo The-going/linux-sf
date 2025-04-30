@@ -71,6 +71,7 @@ dtb-$(CONFIG_ARCH_SUNXI) += \
 	sun50i-h616-i2c3-ph.dtbo \
 	sun50i-h616-i2c4-pg.dtbo \
 	sun50i-h616-i2c4-ph.dtbo \
+	sun50i-h616-keys.dtbo \
 	sun50i-h616-pwm1-ph3.dtbo \
 	sun50i-h616-pwm1-pi11.dtbo \
 	sun50i-h616-pwm2-ph2.dtbo \
