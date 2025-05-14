@@ -80,6 +80,22 @@
 	};
 };
 
+&ahub_dam_plat {
+	status = "okay";
+};
+
+&ahub1_plat {
+	status = "okay";
+};
+
+&ahub1_mach {
+	status = "okay";
+};
+
+/* &ahub_i2s2 {
+	status = "okay";
+}; */
+
 &cpu0 {
 	cpu-supply = <&reg_dcdc2>;
 };
@@ -89,7 +105,7 @@
 };
 
 &gpu {
-	status = "disabled";
+	status = "okay";
 	mali-supply = <&reg_dcdc1>;
 };
 

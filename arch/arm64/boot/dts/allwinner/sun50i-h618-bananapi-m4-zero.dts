@@ -34,6 +34,11 @@
 	};
 };
 
+/* &codec {
+	status = "okay";
+	allwinner,audio-routing = "Hdmi", "HDMI";
+}; */
+
 /* Connected to an on-board RTL8821CU USB WiFi chip. */
 &ehci1 {
 	status = "okay";
