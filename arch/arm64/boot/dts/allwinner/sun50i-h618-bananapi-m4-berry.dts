@@ -290,6 +290,10 @@
 	status = "okay";
 };
 
+&ahub_dam_mach {
+	status = "okay";
+};
+
 &ahub1_plat {
 	status = "okay";
 };
@@ -297,9 +301,3 @@
 &ahub1_mach {
 	status = "okay";
 };
-
-/*
-&ahub_i2s2 {
-	status = "okay";
-};
-*/
