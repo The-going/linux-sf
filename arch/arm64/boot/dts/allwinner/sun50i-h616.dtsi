@@ -1076,6 +1076,17 @@
 			status = "disabled";
 		};
 
+		ahub_dam_mach:ahub_dam_mach {
+			compatible = "allwinner,sunxi-snd-mach";
+			soundcard-mach,name = "ahubdam";
+			status          = "disabled";
+			soundcard-mach,cpu {
+				sound-dai = <&ahub_dam_plat>;
+			};
+			soundcard-mach,codec {
+			};
+		};
+
 		ahub1_plat:ahub1_plat {
 			#sound-dai-cells = <0>;
 			compatible      = "allwinner,sunxi-snd-plat-ahub";
